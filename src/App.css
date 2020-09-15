@@ -1,8 +1,62 @@
+body, button {
+  font-family: 'Architects Daughter', cursive;
+}
+
+ul {
+  padding: 0;
+}
 .App {
   padding: 30px;
   display: flex;
+  text-align: center;
 }
 
 .App > div {
   margin-right: 50px;
+}
+
+.wrapper {
+  position: relative;
+}
+.tasksWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.error {
+  border: red 1px solid;
+}
+.error-message {
+  color: red;
+}
+
+.is-done {
+  opacity: .5;
+  text-decoration: line-through;
+}
+.deleteTodoList {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.delete {
+  border: none;
+  background-color: tomato;
+  border-radius: 10px;
+}
+
+.filterWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.filterBtn {
+  border-radius: 5px;
+  border: #327eff 2px solid;
+  color: white;
+  background-color: #0acd82;
+  padding: 5px 10px;
+  margin: 5px;
+}
+.active-filter {
+  background-color: #327eff;
 }
