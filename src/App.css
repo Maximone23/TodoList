@@ -17,6 +17,9 @@ ul {
 
 .wrapper {
   position: relative;
+  background-color: lightskyblue;
+  border-radius: 5px;
+  padding: 15px;
 }
 .tasksWrapper {
   display: flex;
@@ -38,6 +41,7 @@ ul {
   position: absolute;
   top: 0;
   right: 0;
+  margin: 5px;
 }
 .delete {
   border: none;
