@@ -1,66 +1,66 @@
-body, button {
-  font-family: 'Architects Daughter', cursive;
-}
+/*body, button {*/
+/*  font-family: 'Architects Daughter', cursive;*/
+/*}*/
 
-ul {
-  padding: 0;
-}
-.App {
-  padding: 30px;
-  display: flex;
-  text-align: center;
-}
+/*ul {*/
+/*  padding: 0;*/
+/*}*/
+/*.App {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*  text-align: center;*/
+/*}*/
 
-.App > div {
-  margin-right: 50px;
-}
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
 
-.wrapper {
-  position: relative;
-  background-color: lightskyblue;
-  border-radius: 5px;
-  padding: 15px;
-}
-.tasksWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.error {
-  border: red 1px solid;
-}
-.error-message {
-  color: red;
-}
+/*.wrapper {*/
+/*  position: relative;*/
+/*  background-color: lightskyblue;*/
+/*  border-radius: 5px;*/
+/*  padding: 15px;*/
+/*}*/
+/*.tasksWrapper {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  justify-content: space-between;*/
+/*}*/
+/*.error {*/
+/*  border: red 1px solid;*/
+/*}*/
+/*.error-message {*/
+/*  color: red;*/
+/*}*/
 
 .is-done {
   opacity: .5;
   text-decoration: line-through;
 }
-.deleteTodoList {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 5px;
-}
-.delete {
-  border: none;
-  background-color: tomato;
-  border-radius: 10px;
-}
+/*.deleteTodoList {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  right: 0;*/
+/*  margin: 5px;*/
+/*}*/
+/*.delete {*/
+/*  border: none;*/
+/*  background-color: tomato;*/
+/*  border-radius: 10px;*/
+/*}*/
 
-.filterWrapper {
-  display: flex;
-  justify-content: space-between;
-}
-.filterBtn {
-  border-radius: 5px;
-  border: #327eff 2px solid;
-  color: white;
-  background-color: #0acd82;
-  padding: 5px 10px;
-  margin: 5px;
-}
-.active-filter {
-  background-color: #327eff;
-}
+/*.filterWrapper {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*}*/
+/*.filterBtn {*/
+/*  border-radius: 5px;*/
+/*  border: #327eff 2px solid;*/
+/*  color: white;*/
+/*  background-color: #0acd82;*/
+/*  padding: 5px 10px;*/
+/*  margin: 5px;*/
+/*}*/
+/*.active-filter {*/
+/*  background-color: #327eff;*/
+/*}*/
