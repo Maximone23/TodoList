@@ -1,10 +1,13 @@
 body, button {
   font-family: 'Architects Daughter', cursive;
 }
+li {
+  list-style: none;
+}
 
-/*ul {*/
-/*  padding: 0;*/
-/*}*/
+ul {
+  padding: 0;
+}
 /*.App {*/
 /*  padding: 30px;*/
 /*  display: flex;*/

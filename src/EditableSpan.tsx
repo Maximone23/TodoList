@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react'
-import {TextField} from "@material-ui/core";
+import {TextField} from "@material-ui/core"
 
 type EditableSpanType = {
     value: string
@@ -7,8 +7,8 @@ type EditableSpanType = {
     changeValue: (value: string) => void
 }
 
-function EditableSpan(props: EditableSpanType) {
-
+export const EditableSpan = React.memo((props: EditableSpanType) => {
+    console.log('ESpan')
     let [editMode, setEditMode] = useState<boolean>(false)
     let [title, setTitle] = useState<string>(props.value)
 
@@ -24,22 +24,14 @@ function EditableSpan(props: EditableSpanType) {
     }
     return (
         editMode
-            ?
-            // <input
-            //     value={title}
-            //     onBlur={deActivatedEditMode}
-            //     autoFocus={true}
-            //     onChange={onChangeHandler}/>
-            <TextField value={title}
-                       onBlur={deActivatedEditMode}
-                       autoFocus={true}
-                       onChange={onChangeHandler}/>
+            ? <TextField value={title}
+                         onBlur={deActivatedEditMode}
+                         autoFocus={true}
+                         onChange={onChangeHandler}/>
             : <span
                 className={props.isDone ? "is-done" : ""}
                 onDoubleClick={activatedEditMode}>
                 {props.value}
               </span>
     )
-}
-
-export default EditableSpan
+})
