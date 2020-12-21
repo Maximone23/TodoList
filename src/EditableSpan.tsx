@@ -1,14 +1,13 @@
 import React, {ChangeEvent, useState} from 'react'
 import {TextField} from "@material-ui/core"
 
-type EditableSpanType = {
+export type EditableSpanType = {
     value: string
     isDone?: boolean
     changeValue: (value: string) => void
 }
 
 export const EditableSpan = React.memo((props: EditableSpanType) => {
-    console.log('ESpan')
     let [editMode, setEditMode] = useState<boolean>(false)
     let [title, setTitle] = useState<string>(props.value)
 

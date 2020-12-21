@@ -6,7 +6,7 @@ import {action} from "@storybook/addon-actions";
 import {Task, TaskPropsType} from "./Task";
 
 export default {
-    title: 'Components/Task',
+    title: 'Todolist/Task',
     component: Task
 } as Meta;
 
@@ -14,19 +14,22 @@ const removeCallBack = action('Remove callback was clicked')
 const changeStatusCallBack = action('Change status callback was clicked')
 const changeTitleCallBack = action('Change title callback was clicked')
 
-const Template: Story<TaskPropsType> = (args) => <div>
-    <Task todolistId={'1'}
-    changeTaskTitle={changeTitleCallBack}
-    changeStatus={changeStatusCallBack}
-    removeTask={removeCallBack}
-    task={{id: '1', isDone: true, title: 'CSS'}}/>
-    <Task todolistId={'1'}
-    changeTaskTitle={changeTitleCallBack}
-    changeStatus={changeStatusCallBack}
-    removeTask={removeCallBack}
-    task={{id: '2', isDone: true, title: 'JS'}}/>
-</div> ;
+const Template: Story<TaskPropsType> = (args) => <Task {...args}/>
+const baseArg = {
+    changeStatus: changeStatusCallBack,
+    changeTaskTitle: changeTitleCallBack,
+    removeTask: removeCallBack,
+}
 
-export const Primary = Template.bind({})
-Primary.args = {
+export const IsNotCompletedTask = Template.bind({})
+IsNotCompletedTask.args = {
+    todolistId: 'todolistId1',
+    ...baseArg,
+    task: {id: '1', isDone: false, title: 'CSS'}
+}
+export const CompletedTask = Template.bind({})
+CompletedTask.args = {
+    todolistId: 'todolistId1',
+    ...baseArg,
+    task: {id: '2', isDone: true, title: 'JS'}
 }
