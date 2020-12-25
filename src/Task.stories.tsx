@@ -4,6 +4,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 
 import {action} from "@storybook/addon-actions";
 import {Task, TaskPropsType} from "./Task";
+import {v1} from "uuid";
 
 export default {
     title: 'Todolist/Task',
@@ -25,11 +26,35 @@ export const IsNotCompletedTask = Template.bind({})
 IsNotCompletedTask.args = {
     todolistId: 'todolistId1',
     ...baseArg,
-    task: {id: '1', isDone: false, title: 'CSS'}
+    task: {
+        todoListId: v1(),
+        title: "HTML&CSS",
+        completed: false,
+        status: 0,
+        addedDate: '',
+        deadline: '',
+        description: '',
+        order: 0,
+        priority: 0,
+        startDate: '',
+        id: v1()
+    }
 }
 export const CompletedTask = Template.bind({})
 CompletedTask.args = {
     todolistId: 'todolistId1',
     ...baseArg,
-    task: {id: '2', isDone: true, title: 'JS'}
+    task: {
+        todoListId: v1(),
+        title: "HTML&CSS",
+        completed: true,
+        status: 0,
+        addedDate: '',
+        deadline: '',
+        description: '',
+        order: 0,
+        priority: 0,
+        startDate: '',
+        id: v1()
+    }
 }

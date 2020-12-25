@@ -13,17 +13,65 @@ const rootReducer = combineReducers({
 
 const initialGlobalState: AppRootStateType = {
     todolists: [
-        {id: "todolistId1", title: "What to learn", filter: "all"},
-        {id: "todolistId2", title: "What to buy", filter: "all"}
-    ] ,
+        {id: "todolistId1", title: "What to learn", filter: "all", order: 0, addedDate: '', items: []},
+        {id: "todolistId2", title: "What to buy", filter: "all", order: 0, addedDate: '', items: []}
+    ],
     tasks: {
         ["todolistId1"]: [
-            {id: v1(), title: "HTML&CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true}
+            {
+                todoListId: v1(),
+                title: "HTML&CSS",
+                completed: true,
+                status: 0,
+                addedDate: '',
+                deadline: '',
+                description: '',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                id: v1()
+            },
+            {
+                todoListId: v1(),
+                title: "JS",
+                completed: true,
+                status: 0,
+                addedDate: '',
+                deadline: '',
+                description: '',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                id: v1()
+            }
         ],
         ["todolistId2"]: [
-            {id: v1(), title: "Milk", isDone: true},
-            {id: v1(), title: "React Book", isDone: true}
+            {
+                todoListId: v1(),
+                title: "Milk",
+                completed: true,
+                status: 0,
+                addedDate: '',
+                deadline: '',
+                description: '',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                id: v1()
+            },
+            {
+                todoListId: v1(),
+                title: "ReactBook",
+                completed: true,
+                status: 0,
+                addedDate: '',
+                deadline: '',
+                description: '',
+                order: 0,
+                priority: 0,
+                startDate: '',
+                id: v1()
+            }
         ]
     }
 };

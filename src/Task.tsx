@@ -2,7 +2,7 @@ import React, {ChangeEvent, useCallback} from 'react'
 import {Checkbox, IconButton} from "@material-ui/core"
 import {EditableSpan} from "./EditableSpan"
 import {Delete} from "@material-ui/icons"
-import {TaskType} from "./AppWithRedux"
+import {TaskType} from "./api/todolist-api";
 
 export type TaskPropsType = {
     removeTask: (taskID: string, todoListID: string) => void
@@ -11,28 +11,27 @@ export type TaskPropsType = {
     task: TaskType
     todolistId: string
 }
-export const Task = React.memo((props: TaskPropsType) => {
-    console.log('Task')
-    const removeTask = useCallback(() => {
-        props.removeTask(props.task.id, props.todolistId)
-    }, [props.removeTask, props.task.id, props.todolistId])
-    const changeStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        props.changeStatus(props.task.id, e.currentTarget.checked, props.todolistId)
-    }, [props.changeStatus, props.task.id, props.todolistId])
-    const changeTaskTitle = useCallback((value: string) => {
-        props.changeTaskTitle(props.task.id, value, props.todolistId)
-    }, [props.changeTaskTitle, props.task.id, props.todolistId])
+export const Task = React.memo(({removeTask, changeStatus, changeTaskTitle, task, todolistId}: TaskPropsType) => {
+    const removeTaskCB = useCallback(() => {
+        removeTask(task.id, todolistId)
+    }, [removeTask, task.id, todolistId])
+    const changeStatusCB = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        changeStatus(task.id, e.currentTarget.checked, todolistId)
+    }, [changeStatus, task.id, todolistId])
+    const changeTaskTitleCB = useCallback((value: string) => {
+        changeTaskTitle(task.id, value, todolistId)
+    }, [changeTaskTitle, task.id, todolistId])
     return (
-        <li key={props.task.id}>
+        <li key={task.id}>
             <div>
-                <Checkbox checked={props.task.isDone}
+                <Checkbox checked={task.completed}
                           color={"primary"}
-                          onChange={changeStatus}/>
+                          onChange={changeStatusCB}/>
                 <EditableSpan
-                    isDone={props.task.isDone}
-                    value={props.task.title}
-                    changeValue={changeTaskTitle}/>
-                <IconButton onClick={removeTask}>
+                    isDone={task.completed}
+                    value={task.title}
+                    changeValue={changeTaskTitleCB}/>
+                <IconButton onClick={removeTaskCB}>
                     <Delete/>
                 </IconButton>
             </div>

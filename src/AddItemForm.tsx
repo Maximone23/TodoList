@@ -35,13 +35,6 @@ export const AddItemForm = React.memo( ({addItem}: AddItemFormType) => {
     }
     return (
         <div>
-            {/*<input*/}
-            {/*    placeholder="Add new"*/}
-            {/*    value={title}*/}
-            {/*    onChange={onChangeHandler}*/}
-            {/*    onKeyPress={onKeyUpHandler}*/}
-            {/*    className={error ? "error" : ""}/>*/}
-            {/*<button onClick={onAddTaskClick}>+</button>*/}
             <TextField variant={"outlined"}
                        size={"small"}
                        placeholder="Add new"
@@ -51,11 +44,9 @@ export const AddItemForm = React.memo( ({addItem}: AddItemFormType) => {
                        onChange={onChangeHandler}
                        onKeyPress={onKeyPressHandler}
                        error={!!error}/>
-            {/*<Button variant="contained" color="primary" size="small" onClick={onAddTaskClick}>+</Button>*/}
             <IconButton color="primary" onClick={onAddTaskClick}>
                 <AddBox/>
             </IconButton>
-            {/*{error && <div className={"error-message"}>{error}</div>}*/}
         </div>
     )
 
