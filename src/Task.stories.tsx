@@ -29,7 +29,6 @@ IsNotCompletedTask.args = {
     task: {
         todoListId: v1(),
         title: "HTML&CSS",
-        completed: false,
         status: 0,
         addedDate: '',
         deadline: '',
@@ -47,8 +46,7 @@ CompletedTask.args = {
     task: {
         todoListId: v1(),
         title: "HTML&CSS",
-        completed: true,
-        status: 0,
+        status: 2,
         addedDate: '',
         deadline: '',
         description: '',

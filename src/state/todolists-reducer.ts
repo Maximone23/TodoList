@@ -99,6 +99,9 @@ export const fetchTodolistsTC = () => {
             .then((res) => {
                 dispatch(setTodolistsAC(res.data))
             })
+            .catch((e) => {
+                console.log(e)
+            })
     }
 }
 export const removeTodolistTC = (todolistId: string) => {
@@ -106,6 +109,9 @@ export const removeTodolistTC = (todolistId: string) => {
         todolistAPI.deleteTodolist(todolistId)
             .then(() => {
                 dispatch(removeTodoListAC(todolistId))
+            })
+            .catch((e) => {
+                console.log(e)
             })
     }
 }
@@ -115,6 +121,9 @@ export const addTodolistTC = (title: string) => {
             .then(() => {
                 dispatch(addTodoListAC(title))
             })
+            .catch((e) => {
+                console.log(e)
+            })
     }
 }
 export const updateTodolistTC = (todolistId: string, title: string) => {
@@ -122,6 +131,9 @@ export const updateTodolistTC = (todolistId: string, title: string) => {
         todolistAPI.updateTodolist(todolistId, title)
             .then(() => {
                 dispatch(changeTodoListTitleAC(todolistId, title))
+            })
+            .catch((e) => {
+                console.log(e)
             })
     }
 }

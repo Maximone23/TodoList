@@ -7,7 +7,7 @@ import {AddItemForm} from "./AddItemForm"
 import {Task} from "./Task"
 import {useDispatch} from "react-redux";
 import {fetchTasksTC} from "./state/tasks-reducer";
-import {TaskType} from "./api/todolist-api";
+import {TaskStatuses, TaskType} from "./api/todolist-api";
 
 type PropsType = {
     id: string
@@ -17,7 +17,7 @@ type PropsType = {
     addTask: (title: string, todoListID: string) => void
     removeTask: (taskID: string, todoListID: string) => void
     changeFilter: (value: FilterValuesType, todoListID: string) => void
-    changeStatus: (taskID: string, completed: boolean, todoListID: string) => void
+    changeStatus: (taskID: string, status: TaskStatuses, todoListID: string) => void
     removeTodoList: (todoListID: string) => void
     changeTaskTitle: (taskID: string, title: string, todoListID: string) => void
     changeTodoListTitle: (todoListID: string, title: string) => void
@@ -35,10 +35,10 @@ export const TodoList: React.FC<PropsType> = React.memo((
     }, [dispatch, id])
     let tasksForTodoList = tasks
     if (filter === "active") {
-        tasksForTodoList = tasks.filter(t => !t.completed)
+        tasksForTodoList = tasks.filter(t => !t.status)
     }
     if (filter === "completed") {
-        tasksForTodoList = tasks.filter(t => t.completed)
+        tasksForTodoList = tasks.filter(t => t.status)
     }
 
     const addTaskCB = useCallback((title: string) => {

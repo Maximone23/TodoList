@@ -21,7 +21,6 @@ const initialGlobalState: AppRootStateType = {
             {
                 todoListId: v1(),
                 title: "HTML&CSS",
-                completed: true,
                 status: 0,
                 addedDate: '',
                 deadline: '',
@@ -34,7 +33,6 @@ const initialGlobalState: AppRootStateType = {
             {
                 todoListId: v1(),
                 title: "JS",
-                completed: true,
                 status: 0,
                 addedDate: '',
                 deadline: '',
@@ -49,7 +47,6 @@ const initialGlobalState: AppRootStateType = {
             {
                 todoListId: v1(),
                 title: "Milk",
-                completed: true,
                 status: 0,
                 addedDate: '',
                 deadline: '',
@@ -62,7 +59,6 @@ const initialGlobalState: AppRootStateType = {
             {
                 todoListId: v1(),
                 title: "ReactBook",
-                completed: true,
                 status: 0,
                 addedDate: '',
                 deadline: '',

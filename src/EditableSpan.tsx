@@ -3,7 +3,6 @@ import {TextField} from "@material-ui/core"
 
 export type EditableSpanType = {
     value: string
-    isDone?: boolean
     changeValue: (value: string) => void
 }
 
@@ -21,16 +20,7 @@ export const EditableSpan = React.memo((props: EditableSpanType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
-    return (
-        editMode
-            ? <TextField value={title}
-                         onBlur={deActivatedEditMode}
-                         autoFocus={true}
-                         onChange={onChangeHandler}/>
-            : <span
-                className={props.isDone ? "is-done" : ""}
-                onDoubleClick={activatedEditMode}>
-                {props.value}
-              </span>
-    )
+    return editMode
+            ? <TextField value={title} onBlur={deActivatedEditMode} autoFocus onChange={onChangeHandler}/>
+            : <span onDoubleClick={activatedEditMode}>{props.value}</span>
 })
