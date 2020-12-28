@@ -1,91 +1,86 @@
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer'
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from './tasks-reducer'
 import {TasksStateType} from '../AppWithRedux'
 import {addTodoListAC, removeTodoListAC} from "./todolists-reducer";
+import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
 
 let startState: TasksStateType
 beforeEach(() => {
     startState = {
         "todolistId1": [
             {
+                id: '1',
+                title: "CSS",
+                status: TaskStatuses.New,
                 todoListId: "todolistId1",
-                title: "HTML&CSS",
-                completed: true,
-                status: 0,
-                addedDate: '',
-                deadline: '',
                 description: '',
-                order: 0,
-                priority: 0,
                 startDate: '',
-                id: '1'
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
             },
             {
-                todoListId: "todolistId1",
+                id: '2',
                 title: "JS",
-                completed: true,
-                status: 0,
-                addedDate: '',
-                deadline: '',
+                status: TaskStatuses.Completed,
+                todoListId: "todolistId1",
                 description: '',
-                order: 0,
-                priority: 0,
                 startDate: '',
-                id: "2"
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
             },
             {
-                todoListId: "todolistId1",
+                id: '3',
                 title: "React",
-                completed: true,
-                status: 0,
-                addedDate: '',
-                deadline: '',
+                status: TaskStatuses.New,
+                todoListId: "todolistId1",
                 description: '',
-                order: 0,
-                priority: 0,
                 startDate: '',
-                id: "3"
-            }
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+            },
         ],
         "todolistId2": [
             {
+                id: '1',
+                title: "Bread",
+                status: TaskStatuses.New,
                 todoListId: "todolistId2",
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
+            },
+            {
+                id: '2',
                 title: "Milk",
-                completed: true,
-                status: 0,
-                addedDate: '',
-                deadline: '',
+                status: TaskStatuses.Completed,
+                todoListId: "todolistId2",
                 description: '',
-                order: 0,
-                priority: 0,
                 startDate: '',
-                id: '1'
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
             },
             {
+                id: '3',
+                title: "Tea",
+                status: TaskStatuses.New,
                 todoListId: "todolistId2",
-                title: "coffee",
-                completed: false,
-                status: 0,
-                addedDate: '',
-                deadline: '',
                 description: '',
-                order: 0,
-                priority: 0,
                 startDate: '',
-                id: '2'
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
             },
-            {
-                todoListId: "todolistId2",
-                title: "Butter",
-                completed: true,
-                status: 0,
-                addedDate: '',
-                deadline: '',
-                description: '',
-                order: 0,
-                priority: 0,
-                startDate: '',
-                id: '3'
-            }
         ]
     }
 })
@@ -108,7 +103,6 @@ test('correct task should be added to correct array', () => {
     const action = addTaskAC({
             todoListId: "todolistId2",
             title: "juice",
-            completed: false,
             status: 0,
             addedDate: '',
             deadline: '',
@@ -125,29 +119,30 @@ test('correct task should be added to correct array', () => {
     expect(endState["todolistId2"].length).toBe(4);
     expect(endState["todolistId2"][0].id).toBeDefined();
     expect(endState["todolistId2"][0].title).toBe("juice");
-    expect(endState["todolistId2"][0].completed).toBe(false);
+    expect(endState["todolistId2"][0].status).toBe(0);
 })
 
 test('status of specified task should be changed', () => {
 
 
-    const action = changeTaskStatusAC("2", false, "todolistId2");
+    const action = updateTaskAC("2", {status: TaskStatuses.New}, "todolistId2");
 
     const endState = tasksReducer(startState, action)
 
-    expect(endState["todolistId2"][1].completed).toBe(false);
-    expect(endState["todolistId1"][1].completed).toBe(true);
+    expect(endState["todolistId1"][1].status).toBe(TaskStatuses.Completed);
+    expect(endState["todolistId2"][1].status).toBe(TaskStatuses.New);
 })
 
 test('title of specified task should be changed', () => {
 
 
-    const action = changeTaskTitleAC("2", "coffee", "todolistId2");
+    const action = updateTaskAC("2", {title: 'Yogurt'}, "todolistId2");
 
     const endState = tasksReducer(startState, action)
 
-    expect(endState["todolistId2"][1].title).toBe("coffee");
     expect(endState["todolistId1"][1].title).toBe("JS");
+    expect(endState["todolistId2"][1].title).toBe("Yogurt");
+    expect(endState["todolistId2"][0].title).toBe("Bread");
 })
 
 
