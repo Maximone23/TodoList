@@ -1,4 +1,4 @@
-import {FilterValuesType} from "../AppWithRedux"
+import {FilterValuesType} from "../app/AppWithRedux"
 import {v1} from "uuid"
 import {todolistAPI, TodolistType} from "../api/todolist-api";
 import {Dispatch} from "redux";
