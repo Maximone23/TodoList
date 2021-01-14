@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from "react"
-import {FilterValuesType} from "../../../app/AppWithRedux"
+import {FilterValuesType} from "../../../app/App"
 import {EditableSpan} from "../../../components/EditableSpan/EditableSpan"
 import {Button, IconButton} from "@material-ui/core"
 import {Delete} from "@material-ui/icons"

@@ -10,8 +10,8 @@ import {
 import {AppRootStateType} from "../../state/store";
 import {addTaskTC, removeTaskTC, updateTaskTC} from "../../state/tasks-reducer";
 import {TaskStatuses} from "../../api/todolist-api";
-import {FilterValuesType, TasksStateType, TodoListType} from "../../app/AppWithRedux";
-import {Container, Grid, Paper} from "@material-ui/core";
+import {FilterValuesType, TasksStateType, TodoListType} from "../../app/App";
+import {Grid, Paper} from "@material-ui/core";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {TodoList} from "./Todolist/TodoList";
 

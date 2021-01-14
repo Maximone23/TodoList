@@ -69,6 +69,10 @@ const initialGlobalState: AppRootStateType = {
                 id: v1()
             }
         ]
+    },
+    app: {
+        status: "idle",
+        error: null
     }
 };
 

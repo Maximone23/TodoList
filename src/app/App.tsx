@@ -1,9 +1,10 @@
 import React from 'react'
 import './App.css'
-import {AppBar, Button, Container, IconButton, Toolbar, Typography} from "@material-ui/core"
+import {AppBar, Button, Container, IconButton, LinearProgress, Toolbar, Typography} from "@material-ui/core"
 import {Menu} from "@material-ui/icons"
 import {TaskType} from "../api/todolist-api";
 import {TodolistsList} from "../features/TodolistsList/TodolistsList";
+import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 
 
 export type FilterValuesType = "all" | "active" | "completed"
@@ -17,7 +18,7 @@ export type TasksStateType = {
 }
 
 
-function AppWithRedux() {
+function App() {
 
 
     return (
@@ -32,14 +33,16 @@ function AppWithRedux() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+                <LinearProgress />
             </AppBar>
             <Container fixed>
                 <TodolistsList/>
             </Container>
+            <ErrorSnackbar/>
         </div>
     )
 }
 
-export default AppWithRedux
+export default App
 
 
