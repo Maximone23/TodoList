@@ -2,14 +2,17 @@ import {FilterValuesType} from "../app/App"
 import {v1} from "uuid"
 import {todolistAPI, TodolistType} from "../api/todolist-api";
 import {Dispatch} from "redux";
+import {AppStatusType, setStatusAC, SetStatusActionType} from "./app-reducer";
 
 
-type ActionType =
+type ActionsType =
     | RemoveTodoListActionType
     | AddTodoListActionType
     | ChangeTitleActionType
     | ChangeFilterActionType
     | SetTodolistsActionType
+
+type ThunkDispatch = Dispatch<ActionsType | SetStatusActionType>
 
 export type RemoveTodoListActionType = {
     type: 'REMOVE-TODOLIST'
@@ -33,11 +36,12 @@ type ChangeFilterActionType = {
 export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>
 export type TodolistDomainType = TodolistType & {
     filter: FilterValuesType
+    entityStatus: AppStatusType
 }
 
 const initialState: Array<TodolistDomainType> = []
 
-export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionType): Array<TodolistDomainType> => {
+export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionsType): Array<TodolistDomainType> => {
     switch (action.type) {
         case 'REMOVE-TODOLIST':
             return state.filter(tl => tl.id !== action.id)
@@ -48,7 +52,8 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
                 filter: "all",
                 addedDate: '',
                 order: 0,
-                items: []
+                items: [],
+                entityStatus: "idle"
             }, ...state]
         case 'CHANGE-TODOLIST-TITLE':
             return state.map(tl => {
@@ -67,7 +72,8 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
         case 'SET-TODOLISTS': {
             return action.todolists.map(tl => ({
                 ...tl,
-                filter: 'all'
+                filter: 'all',
+                entityStatus: "idle"
             }))
         }
         default:
@@ -94,7 +100,8 @@ export const changeTodoListFilterAC = (todoListID: string, filter: FilterValuesT
 })
 
 export const fetchTodolistsTC = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: ThunkDispatch) => {
+        dispatch(setStatusAC('loading'))
         todolistAPI.getTodolists()
             .then((res) => {
                 dispatch(setTodolistsAC(res.data))
@@ -102,10 +109,14 @@ export const fetchTodolistsTC = () => {
             .catch((e) => {
                 console.log(e)
             })
+            .finally(() => {
+                dispatch(setStatusAC('succeeded'))
+            })
     }
 }
 export const removeTodolistTC = (todolistId: string) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: ThunkDispatch) => {
+        dispatch(setStatusAC('loading'))
         todolistAPI.deleteTodolist(todolistId)
             .then(() => {
                 dispatch(removeTodoListAC(todolistId))
@@ -113,10 +124,14 @@ export const removeTodolistTC = (todolistId: string) => {
             .catch((e) => {
                 console.log(e)
             })
+            .finally(() => {
+                dispatch(setStatusAC('succeeded'))
+            })
     }
 }
 export const addTodolistTC = (title: string) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: ThunkDispatch) => {
+        dispatch(setStatusAC('loading'))
         todolistAPI.createTodolist(title)
             .then(() => {
                 dispatch(addTodoListAC(title))
@@ -124,16 +139,23 @@ export const addTodolistTC = (title: string) => {
             .catch((e) => {
                 console.log(e)
             })
+            .finally(() => {
+                dispatch(setStatusAC('succeeded'))
+            })
     }
 }
 export const updateTodolistTC = (todolistId: string, title: string) => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: ThunkDispatch) => {
+        dispatch(setStatusAC('loading'))
         todolistAPI.updateTodolist(todolistId, title)
             .then(() => {
                 dispatch(changeTodoListTitleAC(todolistId, title))
             })
             .catch((e) => {
                 console.log(e)
+            })
+            .finally(() => {
+                dispatch(setStatusAC('succeeded'))
             })
     }
 }

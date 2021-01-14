@@ -2,8 +2,9 @@ import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, {AlertProps} from '@material-ui/lab/Alert';
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../state/store";
+import {setErrorAC} from "../../state/app-reducer";
 
 function Alert(props: AlertProps) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -20,14 +21,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export  function ErrorSnackbar() {
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+    const dispatch = useDispatch()
     const isOpen = error !== null
 
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }
-
-        // setOpen(false);
+        dispatch(setErrorAC(null))
     };
 
     return (
