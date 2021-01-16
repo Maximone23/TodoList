@@ -1,12 +1,13 @@
 import {v1} from "uuid";
 import {FilterValuesType} from "../app/App";
 import {
-    addTodoListAC,
+    addTodoListAC, changeTodoListEntityStatusAC,
     changeTodoListFilterAC,
     changeTodoListTitleAC,
     removeTodoListAC, TodolistDomainType,
     todolistsReducer
 } from "./todolists-reducer";
+import {AppStatusType} from "./app-reducer";
 
 
 
@@ -18,8 +19,8 @@ beforeEach(() => {
     todolistId2 = v1();
 
     startState = [
-        {id: todolistId1, title: "What to learn", filter: "all", addedDate: '', order: 0, items: []},
-        {id: todolistId2, title: "What to buy", filter: "all", addedDate: '', order: 0, items: []}
+        {id: todolistId1, title: "What to learn", filter: "all", entityStatus: "idle", addedDate: '', order: 0, items: []},
+        {id: todolistId2, title: "What to buy", filter: "all", entityStatus: "idle", addedDate: '', order: 0, items: []}
     ]
 })
 
@@ -63,6 +64,17 @@ test('correct filter of todolist should be changed', () => {
 
     expect(endState[0].filter).toBe("all");
     expect(endState[1].filter).toBe(newFilter);
+});
+test('correct утешен status of todolist should be changed', () => {
+
+    let newStatus: AppStatusType = "loading";
+
+
+
+    const endState = todolistsReducer(startState, changeTodoListEntityStatusAC(todolistId2, newStatus));
+
+    expect(endState[0].entityStatus).toBe("idle");
+    expect(endState[1].entityStatus).toBe(newStatus);
 });
 
 

@@ -6,7 +6,7 @@ import {AddItemForm, AddItemFormType} from "./AddItemForm";
 import {action} from "@storybook/addon-actions";
 
 export default {
-    title: 'Components/AddItemForm',
+    title: 'Todolist/AddItemForm',
     component: AddItemForm,
     argTypes: {
         addItem: (title: string) => {}
@@ -15,7 +15,12 @@ export default {
 
 const Template: Story<AddItemFormType> = (args) => <AddItemForm {...args} />;
 
-export const Primary = Template.bind({})
-Primary.args = {
+export const AddItemFormBaseExample = Template.bind({})
+AddItemFormBaseExample.args = {
     addItem: action('Button inside form clicked')
+}
+export const AddItemFormDisabled = Template.bind({})
+AddItemFormDisabled.args = {
+    addItem: action('Button inside form clicked'),
+    disabled: true
 }

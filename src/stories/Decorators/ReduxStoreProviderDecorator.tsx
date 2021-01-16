@@ -1,25 +1,28 @@
 import React from 'react'
 import {Provider} from 'react-redux'
-import {combineReducers, createStore} from 'redux'
+import {applyMiddleware, combineReducers, createStore} from 'redux'
 import {tasksReducer} from '../../state/tasks-reducer'
 import {todolistsReducer} from '../../state/todolists-reducer'
 import {AppRootStateType} from '../../state/store'
 import {v1} from 'uuid'
+import {appReducer} from "../../state/app-reducer";
+import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todolists: todolistsReducer,
+    app: appReducer
 })
 
 const initialGlobalState: AppRootStateType = {
     todolists: [
         {id: "todolistId1", title: "What to learn", filter: "all", entityStatus: "idle", order: 0, addedDate: '', items: []},
-        {id: "todolistId2", title: "What to buy", filter: "all", entityStatus: "idle", order: 0, addedDate: '', items: []}
+        {id: "todolistId2", title: "What to buy", filter: "all", entityStatus: "loading", order: 0, addedDate: '', items: []}
     ],
     tasks: {
         ["todolistId1"]: [
             {
-                todoListId: v1(),
+                todoListId: "todolistId1",
                 title: "HTML&CSS",
                 status: 0,
                 addedDate: '',
@@ -31,7 +34,7 @@ const initialGlobalState: AppRootStateType = {
                 id: v1()
             },
             {
-                todoListId: v1(),
+                todoListId: "todolistId1",
                 title: "JS",
                 status: 0,
                 addedDate: '',
@@ -45,7 +48,7 @@ const initialGlobalState: AppRootStateType = {
         ],
         ["todolistId2"]: [
             {
-                todoListId: v1(),
+                todoListId: "todolistId2",
                 title: "Milk",
                 status: 0,
                 addedDate: '',
@@ -57,7 +60,7 @@ const initialGlobalState: AppRootStateType = {
                 id: v1()
             },
             {
-                todoListId: v1(),
+                todoListId: "todolistId2",
                 title: "ReactBook",
                 status: 0,
                 addedDate: '',
@@ -76,7 +79,7 @@ const initialGlobalState: AppRootStateType = {
     }
 };
 
-export const storyBookStore = createStore(rootReducer, initialGlobalState);
+export const storyBookStore = createStore(rootReducer, initialGlobalState, applyMiddleware(thunk));
 
 export const ReduxStoreProviderDecorator = (storyFn: any) => (
     <Provider

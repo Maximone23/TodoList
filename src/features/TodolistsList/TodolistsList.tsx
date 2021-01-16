@@ -4,7 +4,7 @@ import {
     addTodolistTC,
     changeTodoListFilterAC,
     fetchTodolistsTC,
-    removeTodolistTC,
+    removeTodolistTC, TodolistDomainType,
     updateTodolistTC
 } from "../../state/todolists-reducer";
 import {AppRootStateType} from "../../state/store";
@@ -15,13 +15,22 @@ import {Grid, Paper} from "@material-ui/core";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {TodoList} from "./Todolist/TodoList";
 
-export const TodolistsList: React.FC = () => {
+
+type PropsType = {
+    demo?: boolean
+}
+
+
+export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     const dispatch = useDispatch()
     useEffect(() => {
+        if (demo) {
+            return
+        }
         dispatch(fetchTodolistsTC())
     }, [dispatch])
 
-    const todolists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
+    const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
 
@@ -69,17 +78,16 @@ export const TodolistsList: React.FC = () => {
                             <Grid item key={tl.id}>
                                 <Paper elevation={3} style={{padding: "10px"}}>
                                     <TodoList
-                                        id={tl.id}
-                                        title={tl.title}
+                                        todolist={tl}
                                         tasks={tasksForTodoList}
-                                        filter={tl.filter}
                                         addTask={addTask}
                                         removeTask={removeTask}
                                         changeFilter={changeFilter}
                                         changeStatus={changeStatus}
                                         removeTodoList={removeTodoList}
                                         changeTaskTitle={changeTaskTitle}
-                                        changeTodoListTitle={changeTodoListTitle}/>
+                                        changeTodoListTitle={changeTodoListTitle}
+                                        demo={demo}/>
                                 </Paper>
                             </Grid>
                         )
